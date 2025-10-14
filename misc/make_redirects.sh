@@ -11,7 +11,6 @@ redirect() {
     cp misc/redirect.html "public$1"
 
     url=${1/\/index.html/\/}
-    url=${url#/}  # Remove leading slash
     sed -i "s|URL|$url|g" "public$1"
 }
 
