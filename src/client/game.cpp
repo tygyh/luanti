@@ -31,6 +31,7 @@
 #include "minimap.h"
 #include "network/networkexceptions.h"
 #include "nodedef.h"         // Needed for determining pointing to nodes
+#include "nodedugevent.h"
 #include "nodemetadata.h"
 #include "particles.h"
 #include "porting.h"

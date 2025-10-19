@@ -11,23 +11,6 @@ class NodeDefManager;
 class MtEventManager;
 class MtEvent;
 
-// TODO move this together with the game.cpp interact code to its own file.
-#include "mtevent.h"
-#include "mapnode.h"
-class NodeDugEvent : public MtEvent
-{
-public:
-	v3s16 p;
-	MapNode n;
-
-	NodeDugEvent(v3s16 p, MapNode n):
-		p(p),
-		n(n)
-	{}
-	Type getType() const { return NODE_DUG; }
-};
-
-
 // This class handles the playing of sound on MtEventManager events
 // and stores which sounds to play.
 
