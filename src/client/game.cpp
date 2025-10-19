@@ -22,6 +22,7 @@
 #include "fontengine.h"
 #include "itemdef.h"
 #include "gameparams.h"
+#include "gamerundata.h"
 #include "gettext.h"
 #include "gui/guiChatConsole.h"
 #include "texturesource.h"
