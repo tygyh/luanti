@@ -192,23 +192,6 @@ protected:
 	static void settingChangedCallback(const std::string &setting_name, void *data);
 	void readSettings();
 
-	inline bool isKeyDown(GameKeyType k)
-	{
-		return input->isKeyDown(k);
-	}
-	inline bool wasKeyDown(GameKeyType k)
-	{
-		return input->wasKeyDown(k);
-	}
-	inline bool wasKeyPressed(GameKeyType k)
-	{
-		return input->wasKeyPressed(k);
-	}
-	inline bool wasKeyReleased(GameKeyType k)
-	{
-		return input->wasKeyReleased(k);
-	}
-
 #ifdef __ANDROID__
 	void handleAndroidChatInput();
 #endif

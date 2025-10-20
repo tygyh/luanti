@@ -1403,14 +1403,14 @@ void Game::processUserInput(f32 dtime)
 
 void Game::processKeyInput()
 {
-	if (wasKeyDown(KeyType::DROP)) {
-		dropSelectedItem(isKeyDown(KeyType::SNEAK));
-	} else if (wasKeyDown(KeyType::AUTOFORWARD)) {
+	if (Interact::wasKeyDown(KeyType::DROP, input)) {
+		dropSelectedItem(Interact::isKeyDown(KeyType::SNEAK, input));
+	} else if (Interact::wasKeyDown(KeyType::AUTOFORWARD, input)) {
 		toggleAutoforward();
-	} else if (wasKeyDown(KeyType::BACKWARD)) {
+	} else if (Interact::wasKeyDown(KeyType::BACKWARD, input)) {
 		if (g_settings->getBool("continuous_forward"))
 			toggleAutoforward();
-	} else if (wasKeyDown(KeyType::INVENTORY)) {
+	} else if (Interact::wasKeyDown(KeyType::INVENTORY, input)) {
 		m_game_formspec.showPlayerInventory(nullptr);
 	} else if (input->cancelPressed()) {
 #ifdef __ANDROID__
@@ -1419,92 +1419,92 @@ void Game::processKeyInput()
 		if (!gui_chat_console->isOpenInhibited()) {
 			m_game_formspec.showPauseMenu();
 		}
-	} else if (wasKeyDown(KeyType::CHAT)) {
+	} else if (Interact::wasKeyDown(KeyType::CHAT, input)) {
 		openConsole(0.2, L"");
-	} else if (wasKeyDown(KeyType::CMD)) {
+	} else if (Interact::wasKeyDown(KeyType::CMD, input)) {
 		openConsole(0.2, L"/");
-	} else if (wasKeyDown(KeyType::CMD_LOCAL)) {
+	} else if (Interact::wasKeyDown(KeyType::CMD_LOCAL, input)) {
 		if (client->modsLoaded())
 			openConsole(0.2, L".");
 		else
 			m_game_ui->showTranslatedStatusText("Client side scripting is disabled");
-	} else if (wasKeyDown(KeyType::CONSOLE)) {
+	} else if (Interact::wasKeyDown(KeyType::CONSOLE, input)) {
 		openConsole(core::clamp(g_settings->getFloat("console_height"), 0.1f, 1.0f));
-	} else if (wasKeyDown(KeyType::FREEMOVE)) {
+	} else if (Interact::wasKeyDown(KeyType::FREEMOVE, input)) {
 		toggleFreeMove();
-	} else if (wasKeyDown(KeyType::JUMP)) {
+	} else if (Interact::wasKeyDown(KeyType::JUMP, input)) {
 		toggleFreeMoveAlt();
-	} else if (wasKeyDown(KeyType::PITCHMOVE)) {
+	} else if (Interact::wasKeyDown(KeyType::PITCHMOVE, input)) {
 		togglePitchMove();
-	} else if (wasKeyDown(KeyType::FASTMOVE)) {
+	} else if (Interact::wasKeyDown(KeyType::FASTMOVE, input)) {
 		toggleFast();
-	} else if (wasKeyDown(KeyType::NOCLIP)) {
+	} else if (Interact::wasKeyDown(KeyType::NOCLIP, input)) {
 		toggleNoClip();
 #if USE_SOUND
-	} else if (wasKeyDown(KeyType::MUTE)) {
+	} else if (Interact::wasKeyDown(KeyType::MUTE, input)) {
 		bool new_mute_sound = !g_settings->getBool("mute_sound");
 		g_settings->setBool("mute_sound", new_mute_sound);
 		if (new_mute_sound)
 			m_game_ui->showTranslatedStatusText("Sound muted");
 		else
 			m_game_ui->showTranslatedStatusText("Sound unmuted");
-	} else if (wasKeyDown(KeyType::INC_VOLUME)) {
+	} else if (Interact::wasKeyDown(KeyType::INC_VOLUME, input)) {
 		float new_volume = g_settings->getFloat("sound_volume", 0.0f, 0.9f) + 0.1f;
 		g_settings->setFloat("sound_volume", new_volume);
 		std::wstring msg = fwgettext("Volume changed to %d%%", myround(new_volume * 100));
 		m_game_ui->showStatusText(msg);
-	} else if (wasKeyDown(KeyType::DEC_VOLUME)) {
+	} else if (Interact::wasKeyDown(KeyType::DEC_VOLUME, input)) {
 		float new_volume = g_settings->getFloat("sound_volume", 0.1f, 1.0f) - 0.1f;
 		g_settings->setFloat("sound_volume", new_volume);
 		std::wstring msg = fwgettext("Volume changed to %d%%", myround(new_volume * 100));
 		m_game_ui->showStatusText(msg);
 #else
-	} else if (wasKeyDown(KeyType::MUTE) || wasKeyDown(KeyType::INC_VOLUME)
-			|| wasKeyDown(KeyType::DEC_VOLUME)) {
+	} else if (Interact::wasKeyDown(KeyType::MUTE) || Interact::wasKeyDown(KeyType::INC_VOLUME)
+			|| Interact::wasKeyDown(KeyType::DEC_VOLUME)) {
 		m_game_ui->showTranslatedStatusText("Sound system is not supported on this build");
 #endif
-	} else if (wasKeyDown(KeyType::CINEMATIC)) {
+	} else if (Interact::wasKeyDown(KeyType::CINEMATIC, input)) {
 		toggleCinematic();
-	} else if (wasKeyPressed(KeyType::SCREENSHOT)) {
+	} else if (Interact::wasKeyPressed(KeyType::SCREENSHOT, input)) {
 		client->makeScreenshot();
-	} else if (wasKeyPressed(KeyType::TOGGLE_BLOCK_BOUNDS)) {
+	} else if (Interact::wasKeyPressed(KeyType::TOGGLE_BLOCK_BOUNDS, input)) {
 		toggleBlockBounds();
-	} else if (wasKeyPressed(KeyType::TOGGLE_HUD)) {
+	} else if (Interact::wasKeyPressed(KeyType::TOGGLE_HUD, input)) {
 		m_game_ui->toggleHud();
-	} else if (wasKeyPressed(KeyType::MINIMAP)) {
-		toggleMinimap(isKeyDown(KeyType::SNEAK));
-	} else if (wasKeyPressed(KeyType::TOGGLE_CHAT)) {
+	} else if (Interact::wasKeyPressed(KeyType::MINIMAP, input)) {
+		toggleMinimap(Interact::isKeyDown(KeyType::SNEAK, input));
+	} else if (Interact::wasKeyPressed(KeyType::TOGGLE_CHAT, input)) {
 		m_game_ui->toggleChat(client);
-	} else if (wasKeyPressed(KeyType::TOGGLE_FOG)) {
+	} else if (Interact::wasKeyPressed(KeyType::TOGGLE_FOG, input)) {
 		toggleFog();
-	} else if (wasKeyDown(KeyType::TOGGLE_UPDATE_CAMERA)) {
+	} else if (Interact::wasKeyDown(KeyType::TOGGLE_UPDATE_CAMERA, input)) {
 		toggleUpdateCamera();
-	} else if (wasKeyPressed(KeyType::CAMERA_MODE)) {
+	} else if (Interact::wasKeyPressed(KeyType::CAMERA_MODE, input)) {
 		camera->toggleCameraMode();
 		updateCameraMode();
-	} else if (wasKeyPressed(KeyType::TOGGLE_DEBUG)) {
+	} else if (Interact::wasKeyPressed(KeyType::TOGGLE_DEBUG, input)) {
 		toggleDebug();
-	} else if (wasKeyPressed(KeyType::TOGGLE_PROFILER)) {
+	} else if (Interact::wasKeyPressed(KeyType::TOGGLE_PROFILER, input)) {
 		m_game_ui->toggleProfiler();
-	} else if (wasKeyDown(KeyType::INCREASE_VIEWING_RANGE)) {
+	} else if (Interact::wasKeyDown(KeyType::INCREASE_VIEWING_RANGE, input)) {
 		increaseViewRange();
-	} else if (wasKeyDown(KeyType::DECREASE_VIEWING_RANGE)) {
+	} else if (Interact::wasKeyDown(KeyType::DECREASE_VIEWING_RANGE, input)) {
 		decreaseViewRange();
-	} else if (wasKeyPressed(KeyType::RANGESELECT)) {
+	} else if (Interact::wasKeyPressed(KeyType::RANGESELECT, input)) {
 		toggleFullViewRange();
-	} else if (wasKeyDown(KeyType::ZOOM)) {
+	} else if (Interact::wasKeyDown(KeyType::ZOOM, input)) {
 		checkZoomEnabled();
-	} else if (wasKeyDown(KeyType::QUICKTUNE_NEXT)) {
+	} else if (Interact::wasKeyDown(KeyType::QUICKTUNE_NEXT, input)) {
 		quicktune->next();
-	} else if (wasKeyDown(KeyType::QUICKTUNE_PREV)) {
+	} else if (Interact::wasKeyDown(KeyType::QUICKTUNE_PREV, input)) {
 		quicktune->prev();
-	} else if (wasKeyDown(KeyType::QUICKTUNE_INC)) {
+	} else if (Interact::wasKeyDown(KeyType::QUICKTUNE_INC, input)) {
 		quicktune->inc();
-	} else if (wasKeyDown(KeyType::QUICKTUNE_DEC)) {
+	} else if (Interact::wasKeyDown(KeyType::QUICKTUNE_DEC, input)) {
 		quicktune->dec();
 	}
 
-	if (!isKeyDown(KeyType::JUMP) && runData.reset_jump_timer) {
+	if (!Interact::isKeyDown(KeyType::JUMP, input) && runData.reset_jump_timer) {
 		runData.reset_jump_timer = false;
 		runData.jump_timer_up = 0.0f;
 	}
@@ -1534,10 +1534,10 @@ void Game::processItemSelection(u16 *new_playeritem)
 
 	s32 dir = wheel;
 
-	if (wasKeyDown(KeyType::HOTBAR_NEXT))
+	if (Interact::wasKeyDown(KeyType::HOTBAR_NEXT, input))
 		dir = -1;
 
-	if (wasKeyDown(KeyType::HOTBAR_PREV))
+	if (Interact::wasKeyDown(KeyType::HOTBAR_PREV, input))
 		dir = 1;
 
 	if (dir < 0)
@@ -1549,7 +1549,7 @@ void Game::processItemSelection(u16 *new_playeritem)
 	/* Item selection using hotbar slot keys
 	 */
 	for (u16 i = 0; i <= max_item; i++) {
-		if (wasKeyDown((GameKeyType) (KeyType::SLOT_1 + i))) {
+		if (Interact::wasKeyDown((GameKeyType) (KeyType::SLOT_1 + i), input)) {
 			*new_playeritem = i;
 			break;
 		}
@@ -2006,9 +2006,9 @@ void Game::updateCameraOrientation(CameraOrientation *cam, float dtime)
 bool Game::getTogglableKeyState(GameKeyType key, bool toggling_enabled, bool prev_key_state)
 {
 	if (!toggling_enabled)
-		return isKeyDown(key);
+		return Interact::isKeyDown(key, input);
 	else
-		return prev_key_state ^ wasKeyPressed(key);
+		return prev_key_state ^ Interact::wasKeyPressed(key, input);
 }
 
 
@@ -2024,16 +2024,16 @@ void Game::updatePlayerControl(const CameraOrientation &cam)
 	//TimeTaker tt("update player control", NULL, PRECISION_NANO);
 
 	PlayerControl control(
-		isKeyDown(KeyType::FORWARD),
-		isKeyDown(KeyType::BACKWARD),
-		isKeyDown(KeyType::LEFT),
-		isKeyDown(KeyType::RIGHT),
-		isKeyDown(KeyType::JUMP) || player->getAutojump(),
+		Interact::isKeyDown(KeyType::FORWARD, input),
+		Interact::isKeyDown(KeyType::BACKWARD, input),
+		Interact::isKeyDown(KeyType::LEFT, input),
+		Interact::isKeyDown(KeyType::RIGHT, input),
+		Interact::isKeyDown(KeyType::JUMP, input) || player->getAutojump(),
 		getTogglableKeyState(KeyType::AUX1,  m_cache_toggle_aux1_key, player->control.aux1),
 		getTogglableKeyState(KeyType::SNEAK, allow_sneak_toggle,      player->control.sneak),
-		isKeyDown(KeyType::ZOOM),
-		isKeyDown(KeyType::DIG),
-		isKeyDown(KeyType::PLACE),
+		Interact::isKeyDown(KeyType::ZOOM, input),
+		Interact::isKeyDown(KeyType::DIG, input),
+		Interact::isKeyDown(KeyType::PLACE, input),
 		cam.camera_pitch,
 		cam.camera_yaw,
 		input->getJoystickSpeed(),
@@ -2687,8 +2687,8 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 		g_touchcontrols->applyContextControls(mode);
 		// applyContextControls may change dig/place input.
 		// Update again so that TOSERVER_INTERACT packets have the correct controls set.
-		player->control.dig = isKeyDown(KeyType::DIG);
-		player->control.place = isKeyDown(KeyType::PLACE);
+		player->control.dig = Interact::isKeyDown(KeyType::DIG, input);
+		player->control.place = Interact::isKeyDown(KeyType::PLACE, input);
 	}
 
 	// Note that updating the selection mesh every frame is not particularly efficient,
@@ -2696,7 +2696,7 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 	hud->updateSelectionMesh(camera_offset);
 
 	// Allow digging again if button is not pressed
-	if (runData.digging_blocked && !isKeyDown(KeyType::DIG))
+	if (runData.digging_blocked && !Interact::isKeyDown(KeyType::DIG, input))
 		runData.digging_blocked = false;
 
 	/*
@@ -2705,7 +2705,7 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 		- pointing away from node
 	*/
 	if (runData.digging) {
-		if (wasKeyReleased(KeyType::DIG)) {
+		if (Interact::wasKeyReleased(KeyType::DIG, input)) {
 			infostream << "Dig button released (stopped digging)" << std::endl;
 			runData.digging = false;
 		} else if (pointed != runData.pointed_old) {
@@ -2727,13 +2727,13 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 			client->setCrack(-1, v3s16(0, 0, 0));
 			runData.dig_time = 0.0;
 		}
-	} else if (runData.dig_instantly && wasKeyReleased(KeyType::DIG)) {
+	} else if (runData.dig_instantly && Interact::wasKeyReleased(KeyType::DIG, input)) {
 		// Remove e.g. torches faster when clicking instead of holding dig button
 		runData.nodig_delay_timer = 0;
 		runData.dig_instantly = false;
 	}
 
-	if (!runData.digging && runData.btn_down_for_dig && !isKeyDown(KeyType::DIG))
+	if (!runData.digging && runData.btn_down_for_dig && !Interact::isKeyDown(KeyType::DIG, input))
 		runData.btn_down_for_dig = false;
 
 	runData.punching = false;
@@ -2743,13 +2743,13 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 		selected_def.sound_use : selected_def.sound_use_air;
 
 	// Prepare for repeating, unless we're not supposed to
-	if (isKeyDown(KeyType::PLACE) && !g_settings->getBool("safe_dig_and_place"))
+	if (Interact::isKeyDown(KeyType::PLACE, input) && !g_settings->getBool("safe_dig_and_place"))
 		runData.repeat_place_timer += dtime;
 	else
 		runData.repeat_place_timer = 0;
 
-	if (selected_def.usable && isKeyDown(KeyType::DIG)) {
-		if (wasKeyPressed(KeyType::DIG) && (!client->modsLoaded() ||
+	if (selected_def.usable && Interact::isKeyDown(KeyType::DIG, input)) {
+		if (Interact::wasKeyPressed(KeyType::DIG, input) && (!client->modsLoaded() ||
 				!client->getScript()->on_item_use(selected_item, pointed)))
 			client->interact(INTERACT_USE, pointed);
 	} else if (pointed.type == POINTEDTHING_NODE) {
@@ -2759,26 +2759,26 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 		bool basic_debug_allowed = client->checkPrivilege("debug") || (player->hud_flags & HUD_FLAG_BASIC_DEBUG);
 		handlePointingAtObject(pointed, tool_item, hand_item, player_position,
 				m_game_ui->m_flags.show_basic_debug && basic_debug_allowed);
-	} else if (isKeyDown(KeyType::DIG)) {
+	} else if (Interact::isKeyDown(KeyType::DIG, input)) {
 		// When button is held down in air, show continuous animation
 		runData.punching = true;
 		// Run callback even though item is not usable
-		if (wasKeyPressed(KeyType::DIG) && client->modsLoaded())
+		if (Interact::wasKeyPressed(KeyType::DIG, input) && client->modsLoaded())
 			client->getScript()->on_item_use(selected_item, pointed);
-	} else if (wasKeyPressed(KeyType::PLACE)) {
+	} else if (Interact::wasKeyPressed(KeyType::PLACE, input)) {
 		Interact::handlePointingAtNothing(client);
 	}
 
 	runData.pointed_old = pointed;
 
-	if (runData.punching || wasKeyPressed(KeyType::DIG))
+	if (runData.punching || Interact::wasKeyPressed(KeyType::DIG, input))
 		camera->setDigging(0); // dig animation
 
 	input->clearWasKeyPressed();
 	input->clearWasKeyReleased();
 	// Ensure DIG & PLACE are marked as handled
-	wasKeyDown(KeyType::DIG);
-	wasKeyDown(KeyType::PLACE);
+	Interact::wasKeyDown(KeyType::DIG, input);
+	Interact::wasKeyDown(KeyType::PLACE, input);
 
 	input->joystick.clearWasKeyPressed(KeyType::DIG);
 	input->joystick.clearWasKeyPressed(KeyType::PLACE);
@@ -2898,7 +2898,7 @@ void Game::handlePointingAtNode(const PointedThing &pointed,
 
 	ClientMap &map = client->getEnv().getClientMap();
 
-	if (runData.nodig_delay_timer <= 0.0 && isKeyDown(KeyType::DIG)
+	if (runData.nodig_delay_timer <= 0.0 && Interact::isKeyDown(KeyType::DIG, input)
 			&& !runData.digging_blocked
 			&& client->checkPrivilege("interact")) {
 		handleDigging(pointed, nodepos, selected_item, hand_item, dtime);
@@ -2918,7 +2918,7 @@ void Game::handlePointingAtNode(const PointedThing &pointed,
 		}
 	}
 
-	if ((wasKeyPressed(KeyType::PLACE) ||
+	if ((Interact::wasKeyPressed(KeyType::PLACE, input) ||
 			runData.repeat_place_timer >= m_repeat_place_time) &&
 			client->checkPrivilege("interact")) {
 		runData.repeat_place_timer = 0;
@@ -2961,7 +2961,7 @@ bool Game::nodePlacement(const ItemDefinition &selected_def,
 
 	// formspec in meta
 	if (meta && !meta->getString("formspec").empty() && !input->isRandom()
-			&& !isKeyDown(KeyType::SNEAK)) {
+			&& !Interact::isKeyDown(KeyType::SNEAK, input)) {
 		// on_rightclick callbacks are called anyway
 		if (nodedef_manager->get(map.getNode(nodepos)).rightclickable)
 			client->interact(INTERACT_PLACE, pointed);
@@ -2972,7 +2972,7 @@ bool Game::nodePlacement(const ItemDefinition &selected_def,
 
 	// on_rightclick callback
 	if (prediction.empty() || (nodedef->get(node).rightclickable &&
-			!isKeyDown(KeyType::SNEAK))) {
+			!Interact::isKeyDown(KeyType::SNEAK, input))) {
 		// Report to server
 		client->interact(INTERACT_PLACE, pointed);
 		return false;
@@ -3177,7 +3177,7 @@ void Game::handlePointingAtObject(const PointedThing &pointed, const ItemStack &
 
 	m_game_ui->setInfoText(infotext);
 
-	if (isKeyDown(KeyType::DIG)) {
+	if (Interact::isKeyDown(KeyType::DIG, input)) {
 		bool do_punch = false;
 		bool do_punch_damage = false;
 
@@ -3187,7 +3187,7 @@ void Game::handlePointingAtObject(const PointedThing &pointed, const ItemStack &
 			runData.object_hit_delay_timer = object_hit_delay;
 		}
 
-		if (wasKeyPressed(KeyType::DIG))
+		if (Interact::wasKeyPressed(KeyType::DIG, input))
 			do_punch = true;
 
 		if (do_punch) {
@@ -3208,7 +3208,7 @@ void Game::handlePointingAtObject(const PointedThing &pointed, const ItemStack &
 			if (!disable_send)
 				client->interact(INTERACT_START_DIGGING, pointed);
 		}
-	} else if (wasKeyDown(KeyType::PLACE)) {
+	} else if (Interact::wasKeyDown(KeyType::PLACE, input)) {
 		infostream << "Pressed place button while pointing at object" << std::endl;
 		client->interact(INTERACT_PLACE, pointed);  // place
 	}
