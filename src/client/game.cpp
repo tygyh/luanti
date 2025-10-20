@@ -20,6 +20,7 @@
 #include "content/subgames.h"
 #include "client/event_manager.h"
 #include "fontengine.h"
+#include "interact.h"
 #include "itemdef.h"
 #include "gameparams.h"
 #include "gamerundata.h"
@@ -2765,7 +2766,7 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 		if (wasKeyPressed(KeyType::DIG) && client->modsLoaded())
 			client->getScript()->on_item_use(selected_item, pointed);
 	} else if (wasKeyPressed(KeyType::PLACE)) {
-		handlePointingAtNothing(selected_item);
+		Interact::handlePointingAtNothing(client);
 	}
 
 	runData.pointed_old = pointed;
@@ -2882,15 +2883,6 @@ PointedThing Game::updatePointedThing(
 		hud->setSelectionMeshColor(c);
 	}
 	return result;
-}
-
-
-void Game::handlePointingAtNothing(const ItemStack &playerItem)
-{
-	infostream << "Attempted to place item while pointing at nothing" << std::endl;
-	PointedThing fauxPointed;
-	fauxPointed.type = POINTEDTHING_NOTHING;
-	client->interact(INTERACT_ACTIVATE, fauxPointed);
 }
 
 

@@ -165,7 +165,6 @@ protected:
 			const core::line3d<f32> &shootline, bool liquids_pointable,
 			const std::optional<Pointabilities> &pointabilities,
 			bool look_for_object, const v3s16 &camera_offset);
-	void handlePointingAtNothing(const ItemStack &playerItem);
 	void handlePointingAtNode(const PointedThing &pointed,
 			const ItemStack &selected_item, const ItemStack &hand_item, f32 dtime);
 	void handlePointingAtObject(const PointedThing &pointed, const ItemStack &playeritem,
