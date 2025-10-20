@@ -169,8 +169,6 @@ protected:
 			const ItemStack &selected_item, const ItemStack &hand_item, f32 dtime);
 	void handlePointingAtObject(const PointedThing &pointed, const ItemStack &playeritem,
 			const ItemStack &hand_item, const v3f &player_position, bool show_debug);
-	void handleDigging(const PointedThing &pointed, const v3s16 &nodepos,
-			const ItemStack &selected_item, const ItemStack &hand_item, f32 dtime);
 	void updateFrame(ProfilerGraph *graph, RunStats *stats, f32 dtime,
 			const CameraOrientation &cam);
 	void updateClouds(float dtime);

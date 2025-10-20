@@ -5,7 +5,9 @@
 #pragma once
 
 #include "client.h"
+#include "gamerundata.h"
 #include "inputhandler.h"
+#include "soundmaker.h"
 
 class Interact {
 public:
@@ -18,4 +20,9 @@ public:
 	static bool wasKeyPressed(const GameKeyType k, InputHandler *input) { return input->wasKeyPressed(k); }
 
 	static bool wasKeyReleased(const GameKeyType k, InputHandler *input) { return input->wasKeyReleased(k); }
+
+	static void handleDigging(const PointedThing &pointed, const v3s16 &nodepos, const ItemStack &selected_item,
+				   const ItemStack &hand_item, f32 dtime, Client *client, const NodeDefManager *nodedef_manager,
+				   const IItemDefManager *itemdef_manager, GameRunData runData, f32 crack_animation_length,
+				   SoundMaker *soundmaker, f32 m_repeat_dig_time, Camera *camera);
 };
