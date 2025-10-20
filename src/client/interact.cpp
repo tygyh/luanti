@@ -21,6 +21,23 @@ void handlePointingAtNothing(Client *client)
 	client->interact(INTERACT_ACTIVATE, fauxPointed);
 }
 
+float setNoDigDelayTimer(const GameRunData &runData, const f32 crack_animation_length, const f32 m_repeat_dig_time)
+{
+	float nodig_delay_timer = runData.dig_time_complete / crack_animation_length;
+
+	// We don't want a corresponding delay to very time-consuming nodes
+	// and nodes without digging time (e.g. torches) get a fixed delay.
+	if (nodig_delay_timer > 0.3f)
+		nodig_delay_timer = 0.3f;
+	else if (runData.dig_instantly)
+		nodig_delay_timer = 0.15f;
+
+	// Ensure that the delay between breaking nodes
+	// (dig_time_complete + nodig_delay_timer) is at least the
+	// value of the repeat_dig_time setting.
+	return std::max(nodig_delay_timer, m_repeat_dig_time - runData.dig_time_complete);
+}
+
 void handleDigging(const PointedThing &pointed, const v3s16 &nodepos, const ItemStack &selected_item,
                    const ItemStack &hand_item, f32 dtime, Client *client, const NodeDefManager *nodedef_manager,
                    const IItemDefManager *itemdef_manager, GameRunData runData, f32 crack_animation_length,
@@ -115,21 +132,7 @@ void handleDigging(const PointedThing &pointed, const v3s16 &nodepos, const Item
 		if (g_settings->getBool("safe_dig_and_place"))
 			runData.digging_blocked = true;
 
-		runData.nodig_delay_timer =
-				runData.dig_time_complete / (float) crack_animation_length;
-
-		// We don't want a corresponding delay to very time consuming nodes
-		// and nodes without digging time (e.g. torches) get a fixed delay.
-		if (runData.nodig_delay_timer > 0.3f)
-			runData.nodig_delay_timer = 0.3f;
-		else if (runData.dig_instantly)
-			runData.nodig_delay_timer = 0.15f;
-
-		// Ensure that the delay between breaking nodes
-		// (dig_time_complete + nodig_delay_timer) is at least the
-		// value of the repeat_dig_time setting.
-		runData.nodig_delay_timer = std::max(runData.nodig_delay_timer,
-		                                     m_repeat_dig_time - runData.dig_time_complete);
+		runData.nodig_delay_timer = setNoDigDelayTimer(runData, crack_animation_length, m_repeat_dig_time);
 
 		if (client->modsLoaded() &&
 		    client->getScript()->on_dignode(nodepos, n)) { return; }
