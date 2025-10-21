@@ -20,7 +20,7 @@
 #include "content/subgames.h"
 #include "client/event_manager.h"
 #include "fontengine.h"
-#include "interact.h"
+#include "interact/interact.h"
 #include "itemdef.h"
 #include "gameparams.h"
 #include "gamerundata.h"
