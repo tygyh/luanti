@@ -9,6 +9,7 @@
 #include "../inputhandler.h"
 #include "../soundmaker.h"
 #include "tool.h"
+#include "gui/touchcontrols.h"
 
 class Interact
 {
@@ -43,5 +44,11 @@ public:
 	{
 		Dig::handleDigging(pointed, nodepos, selected_item, hand_item, dtime, client, nodedef_manager, itemdef_manager,
 		                   runData, crack_animation_length, soundmaker, m_repeat_dig_time, camera);
+	}
+
+	static bool isTouchShootlineUsed(const Camera* camera)
+	{
+		return g_touchcontrols && g_touchcontrols->isShootlineAvailable() &&
+			camera->getCameraMode() == CAMERA_MODE_FIRST;
 	}
 };

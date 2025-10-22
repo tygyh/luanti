@@ -1962,12 +1962,6 @@ f32 Game::getSensitivityScaleFactor() const
 	return std::tan(fov_y / 2.0f) * 1.3763819f;
 }
 
-bool Game::isTouchShootlineUsed() const
-{
-	return g_touchcontrols && g_touchcontrols->isShootlineAvailable() &&
-			camera->getCameraMode() == CAMERA_MODE_FIRST;
-}
-
 void Game::updateCameraOrientation(CameraOrientation *cam, float dtime)
 {
 	if (g_touchcontrols) {
@@ -2664,7 +2658,7 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 	}
 	shootline.end = shootline.start + camera_direction * BS * d;
 
-	if (isTouchShootlineUsed()) {
+	if (Interact::isTouchShootlineUsed(camera)) {
 		shootline = g_touchcontrols->getShootline();
 		// Scale shootline to the acual distance the player can reach
 		shootline.end = shootline.start +
@@ -3499,7 +3493,7 @@ void Game::drawScene(ProfilerGraph *graph, RunStats *stats)
 			(player->hud_flags & HUD_FLAG_CROSSHAIR_VISIBLE) &&
 			(this->camera->getCameraMode() != CAMERA_MODE_THIRD_FRONT));
 
-	if (isTouchShootlineUsed())
+	if (Interact::isTouchShootlineUsed(camera))
 		draw_crosshair = false;
 
 	this->m_rendering_engine->draw_scene(sky_color, this->m_game_ui->m_flags.show_hud,
