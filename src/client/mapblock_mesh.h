@@ -346,6 +346,14 @@ void final_color_blend(video::SColor *result,
 		u16 light, u32 daynight_ratio);
 
 /*!
+ * Gives the final SColor shown on screen.
+ *
+ * \param light first 8 bits are daylight, second 8 bits are night light
+ * \param daynight_ratio ratio of day/night light
+ */
+video::SColor final_color_blend(u16 light, u32 daynight_ratio);
+
+/*!
  * Gives the final  SColor shown on screen.
  *
  * \param result output color

@@ -294,6 +294,15 @@ void final_color_blend(video::SColor *result,
 		encode_light(light, 0), dayLight);
 }
 
+video::SColor final_color_blend(const u16 light, const u32 daynight_ratio)
+{
+	video::SColor result;
+	video::SColorf dayLight;
+	get_sunlight_color(&dayLight, daynight_ratio);
+	final_color_blend(&result, encode_light(light, 0), dayLight);
+	return result;
+}
+
 void final_color_blend(video::SColor *result,
 		const video::SColor &data, const video::SColorf &dayLight)
 {

@@ -279,6 +279,13 @@ void Environment::continueRaycast(RaycastState *state, PointedThing *result_p)
 	}
 }
 
+PointedThing Environment::continueRaycast(RaycastState* state)
+{
+	PointedThing result_p;
+	continueRaycast(state, &result_p);
+	return result_p;
+}
+
 void Environment::stepTimeOfDay(float dtime)
 {
 	MutexAutoLock lock(this->m_time_lock);

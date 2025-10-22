@@ -9,6 +9,9 @@
 #include "../inputhandler.h"
 #include "../soundmaker.h"
 #include "tool.h"
+#include "updatePointedThing.h"
+
+#include "client/hud.h"
 #include "gui/touchcontrols.h"
 
 class Interact
@@ -50,5 +53,22 @@ public:
 	{
 		return g_touchcontrols && g_touchcontrols->isShootlineAvailable() &&
 			camera->getCameraMode() == CAMERA_MODE_FIRST;
+	}
+
+	/*!
+	 * Returns the object or node the player is pointing at.
+	 * Also updates the selected thing in the Hud.
+	 *
+	 * @param  camera_offset     offset of the camera
+	 * @param hud                Heads Up Display
+	 * @param client             client connected to server
+	 * @param runData            data about the current run of the game
+	 * @param vision_line        the player's vision line
+	 * @return selected_object   the selected object or NULL if not found
+	 */
+	static PointedThing updatePointedThing(const v3s16& camera_offset, Hud* hud, Client* client,
+	                                       const GameRunData& runData, RaycastState vision_line)
+	{
+		return UpdatePointedThing::updatePointedThing(camera_offset, hud, client, runData, &vision_line);
 	}
 };

@@ -91,6 +91,12 @@ public:
 	 */
 	void continueRaycast(RaycastState *state, PointedThing *result);
 
+	/*!
+	 * @param   state current state of the raycast
+	 * @returns the next node or object the shootline meets.
+	 */
+	PointedThing continueRaycast(RaycastState* state);
+
 	// counter used internally when triggering ABMs
 	u32 m_added_objects;
 

@@ -147,24 +147,6 @@ protected:
 	void updateCamera(f32 dtime);
 	void updateSound(f32 dtime);
 	void processPlayerInteraction(f32 dtime, bool show_hud);
-	/*!
-	 * Returns the object or node the player is pointing at.
-	 * Also updates the selected thing in the Hud.
-	 *
-	 * @param[in]  shootline         the shootline, starting from
-	 * the camera position. This also gives the maximal distance
-	 * of the search.
-	 * @param[in]  liquids_pointable if false, liquids are ignored
-	 * @param[in]  pointabilities    item specific pointable overriding
-	 * @param[in]  look_for_object   if false, objects are ignored
-	 * @param[in]  camera_offset     offset of the camera
-	 * @param[out] selected_object   the selected object or
-	 * NULL if not found
-	 */
-	PointedThing updatePointedThing(
-			const core::line3d<f32> &shootline, bool liquids_pointable,
-			const std::optional<Pointabilities> &pointabilities,
-			bool look_for_object, const v3s16 &camera_offset);
 	void handlePointingAtNode(const PointedThing &pointed,
 			const ItemStack &selected_item, const ItemStack &hand_item, f32 dtime);
 	void handlePointingAtObject(const PointedThing &pointed, const ItemStack &playeritem,

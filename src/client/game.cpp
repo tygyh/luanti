@@ -2667,11 +2667,8 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 		shootline.end += intToFloat(camera_offset, BS);
 	}
 
-	PointedThing pointed = updatePointedThing(shootline,
-			selected_def.liquids_pointable,
-			selected_def.pointabilities,
-			!runData.btn_down_for_dig,
-			camera_offset);
+	RaycastState s(shootline, !runData.btn_down_for_dig, selected_def.liquids_pointable, selected_def.pointabilities);
+	PointedThing pointed = Interact::updatePointedThing(camera_offset, hud, client, runData, s);
 
 	if (pointed != runData.pointed_old)
 		infostream << "Pointing at " << pointed.dump() << std::endl;
@@ -2779,104 +2776,6 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 
 	input->joystick.clearWasKeyReleased(KeyType::DIG);
 	input->joystick.clearWasKeyReleased(KeyType::PLACE);
-}
-
-
-PointedThing Game::updatePointedThing(
-	const core::line3d<f32> &shootline,
-	bool liquids_pointable,
-	const std::optional<Pointabilities> &pointabilities,
-	bool look_for_object,
-	const v3s16 &camera_offset)
-{
-	std::vector<aabb3f> *selectionboxes = hud->getSelectionBoxes();
-	selectionboxes->clear();
-	hud->setSelectedFaceNormal(v3f());
-	static thread_local const bool show_entity_selectionbox = g_settings->getBool(
-		"show_entity_selectionbox");
-
-	ClientEnvironment &env = client->getEnv();
-	ClientMap &map = env.getClientMap();
-	const NodeDefManager *nodedef = map.getNodeDefManager();
-
-	runData.selected_object = NULL;
-	hud->pointing_at_object = false;
-
-	RaycastState s(shootline, look_for_object, liquids_pointable, pointabilities);
-	PointedThing result;
-	env.continueRaycast(&s, &result);
-	if (result.type == POINTEDTHING_OBJECT) {
-		hud->pointing_at_object = true;
-
-		runData.selected_object = client->getEnv().getActiveObject(result.object_id);
-		aabb3f selection_box{{0.0f, 0.0f, 0.0f}};
-		if (show_entity_selectionbox && runData.selected_object->doShowSelectionBox() &&
-				runData.selected_object->getSelectionBox(&selection_box)) {
-			v3f pos = runData.selected_object->getPosition();
-			selectionboxes->push_back(selection_box);
-			hud->setSelectionPos(pos, camera_offset);
-			GenericCAO* gcao = dynamic_cast<GenericCAO*>(runData.selected_object);
-			if (gcao != nullptr && gcao->getProperties().rotate_selectionbox)
-				hud->setSelectionRotationRadians(gcao->getSceneNode()
-						->getAbsoluteTransformation().getRotationRadians());
-			else
-				hud->setSelectionRotationRadians(v3f());
-		}
-		hud->setSelectedFaceNormal(result.raw_intersection_normal);
-	} else if (result.type == POINTEDTHING_NODE) {
-		// Update selection boxes
-		MapNode n = map.getNode(result.node_undersurface);
-		std::vector<aabb3f> boxes;
-		n.getSelectionBoxes(nodedef, &boxes,
-			n.getNeighbors(result.node_undersurface, &map));
-
-		f32 d = 0.002f * BS;
-		for (aabb3f box : boxes) {
-			box.MinEdge -= v3f(d, d, d);
-			box.MaxEdge += v3f(d, d, d);
-			selectionboxes->push_back(box);
-		}
-		hud->setSelectionPos(intToFloat(result.node_undersurface, BS),
-			camera_offset);
-		hud->setSelectionRotationRadians(v3f());
-		hud->setSelectedFaceNormal(result.intersection_normal);
-	}
-
-	// Update selection mesh light level and vertex colors
-	if (!selectionboxes->empty()) {
-		v3f pf = hud->getSelectionPos();
-		v3s16 p = floatToInt(pf, BS);
-
-		// Get selection mesh light level
-		MapNode n = map.getNode(p);
-		u16 node_light = getInteriorLight(n, -1, nodedef);
-		u16 light_level = node_light;
-
-		for (const v3s16 &dir : g_6dirs) {
-			n = map.getNode(p + dir);
-			node_light = getInteriorLight(n, -1, nodedef);
-			if (node_light > light_level)
-				light_level = node_light;
-		}
-
-		u32 daynight_ratio = client->getEnv().getDayNightRatio();
-		video::SColor c;
-		final_color_blend(&c, light_level, daynight_ratio);
-
-		// Modify final color a bit with time
-		u32 timer = client->getEnv().getFrameTime() % 5000;
-		float timerf = (float) (core::PI * ((timer / 2500.0) - 0.5));
-		float sin_r = 0.08f * std::sin(timerf);
-		float sin_g = 0.08f * std::sin(timerf + core::PI * 0.5f);
-		float sin_b = 0.08f * std::sin(timerf + core::PI);
-		c.setRed(core::clamp(core::round32(c.getRed() * (0.8 + sin_r)), 0, 255));
-		c.setGreen(core::clamp(core::round32(c.getGreen() * (0.8 + sin_g)), 0, 255));
-		c.setBlue(core::clamp(core::round32(c.getBlue() * (0.8 + sin_b)), 0, 255));
-
-		// Set mesh final color
-		hud->setSelectionMeshColor(c);
-	}
-	return result;
 }
 
 
