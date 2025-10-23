@@ -5,6 +5,7 @@
 #pragma once
 
 #include "dig.h"
+#include "keypress.h"
 #include "../gamerundata.h"
 #include "../inputhandler.h"
 #include "../soundmaker.h"
@@ -21,22 +22,22 @@ public:
 
 	static bool isKeyDown(const GameKeyType k, InputHandler* input)
 	{
-		return input->isKeyDown(k);
+		return keypress::isKeyDown(k, input);
 	}
 
 	static bool wasKeyDown(const GameKeyType k, InputHandler* input)
 	{
-		return input->wasKeyDown(k);
+		return keypress::wasKeyDown(k, input);
 	}
 
 	static bool wasKeyPressed(const GameKeyType k, InputHandler* input)
 	{
-		return input->wasKeyPressed(k);
+		return keypress::wasKeyPressed(k, input);
 	}
 
 	static bool wasKeyReleased(const GameKeyType k, InputHandler* input)
 	{
-		return input->wasKeyReleased(k);
+		return keypress::wasKeyReleased(k, input);
 	}
 
 	static void handleDigging(const PointedThing& pointed, const v3s16& nodepos, const ItemStack& selected_item,
