@@ -62,6 +62,7 @@ set(client_SRCS
 	${CMAKE_CURRENT_SOURCE_DIR}/interact/dig.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/interact/interact.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/interact/keypress.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/interact/nodeplacement.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/interact/updatePointedThing.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/item_visuals_manager.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/joystick_controller.cpp

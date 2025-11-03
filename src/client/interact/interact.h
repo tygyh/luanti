@@ -5,15 +5,17 @@
 #pragma once
 
 #include "dig.h"
+#include "gui/touchcontrols.h"
 #include "keypress.h"
-#include "../gamerundata.h"
-#include "../inputhandler.h"
-#include "../soundmaker.h"
+#include "nodeplacement.h"
 #include "tool.h"
 #include "updatePointedThing.h"
 
-#include "client/hud.h"
-#include "gui/touchcontrols.h"
+#include "../game_formspec.h"
+#include "../gamerundata.h"
+#include "../inputhandler.h"
+#include "../hud.h"
+#include "../soundmaker.h"
 
 class Interact
 {
@@ -71,5 +73,14 @@ public:
 	                                       const GameRunData& runData, RaycastState vision_line)
 	{
 		return UpdatePointedThing::updatePointedThing(camera_offset, hud, client, runData, &vision_line);
+	}
+
+	static bool nodePlacement(const ItemDefinition& selected_def, const ItemStack& selected_item, const v3s16& nodepos,
+	                          const v3s16& neighborpos, const PointedThing& pointed, const NodeMetadata* meta,
+	                          Client* client, SoundMaker* soundmaker, InputHandler* input,
+	                          const NodeDefManager* nodedef_manager, GameFormSpec* m_game_formspec)
+	{
+		return NodePlacement::nodePlacement(selected_def, selected_item, nodepos, neighborpos, pointed, meta, client,
+		                                    soundmaker, input, nodedef_manager, m_game_formspec);
 	}
 };
