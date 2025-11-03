@@ -5,6 +5,7 @@
 #pragma once
 
 #include "dig.h"
+#include "handlePointingAtNode.h"
 #include "gui/touchcontrols.h"
 #include "keypress.h"
 #include "nodeplacement.h"
@@ -13,7 +14,7 @@
 
 #include "../game_formspec.h"
 #include "../gamerundata.h"
-#include "../inputhandler.h"
+#include "../gameui.h"
 #include "../hud.h"
 #include "../soundmaker.h"
 
@@ -82,5 +83,20 @@ public:
 	{
 		return NodePlacement::nodePlacement(selected_def, selected_item, nodepos, neighborpos, pointed, meta, client,
 		                                    soundmaker, input, nodedef_manager, m_game_formspec);
+	}
+
+	static void handlePointingAtNode(const PointedThing& pointed, const ItemStack& selected_item,
+	                                 const ItemStack& hand_item, const f32 dtime, Client* client,
+	                                 const GameRunData& runData, InputHandler* input,
+	                                 const NodeDefManager* nodedef_manager, const IItemDefManager* itemdef_manager,
+	                                 const f32 crack_animation_length, SoundMaker* soundmaker,
+	                                 const f32 m_repeat_dig_time, Camera* camera,
+	                                 const std::unique_ptr<GameUI>& m_game_ui, const f32 m_repeat_place_time,
+	                                 GameFormSpec* m_game_formspec)
+	{
+		HandlePointingAtNode::handlePointingAtNode(pointed, selected_item, hand_item, dtime, client, runData, input,
+		                                           nodedef_manager, itemdef_manager, crack_animation_length, soundmaker,
+		                                           m_repeat_dig_time, camera, m_game_ui, m_repeat_place_time,
+		                                           m_game_formspec);
 	}
 };

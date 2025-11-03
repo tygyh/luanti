@@ -147,8 +147,6 @@ protected:
 	void updateCamera(f32 dtime);
 	void updateSound(f32 dtime);
 	void processPlayerInteraction(f32 dtime, bool show_hud);
-	void handlePointingAtNode(const PointedThing &pointed,
-			const ItemStack &selected_item, const ItemStack &hand_item, f32 dtime);
 	void handlePointingAtObject(const PointedThing &pointed, const ItemStack &playeritem,
 			const ItemStack &hand_item, const v3f &player_position, bool show_debug);
 	void updateFrame(ProfilerGraph *graph, RunStats *stats, f32 dtime,

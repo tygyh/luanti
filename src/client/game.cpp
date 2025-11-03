@@ -2744,7 +2744,9 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 				!client->getScript()->on_item_use(selected_item, pointed)))
 			client->interact(INTERACT_USE, pointed);
 	} else if (pointed.type == POINTEDTHING_NODE) {
-		handlePointingAtNode(pointed, selected_item, hand_item, dtime);
+		Interact::handlePointingAtNode(pointed, selected_item, hand_item, dtime, client, runData, input,
+		                               nodedef_manager, itemdef_manager, crack_animation_length, soundmaker,
+		                               m_repeat_dig_time, camera, m_game_ui, m_repeat_place_time, &m_game_formspec);
 	} else if (pointed.type == POINTEDTHING_OBJECT) {
 		v3f player_position  = player->getPosition();
 		bool basic_debug_allowed = client->checkPrivilege("debug") || (player->hud_flags & HUD_FLAG_BASIC_DEBUG);
@@ -2776,65 +2778,6 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 
 	input->joystick.clearWasKeyReleased(KeyType::DIG);
 	input->joystick.clearWasKeyReleased(KeyType::PLACE);
-}
-
-
-void Game::handlePointingAtNode(const PointedThing &pointed,
-	const ItemStack &selected_item, const ItemStack &hand_item, f32 dtime)
-{
-	v3s16 nodepos = pointed.node_undersurface;
-	v3s16 neighborpos = pointed.node_abovesurface;
-
-	/*
-		Check information text of node
-	*/
-
-	ClientMap &map = client->getEnv().getClientMap();
-
-	if (runData.nodig_delay_timer <= 0.0 && Interact::isKeyDown(KeyType::DIG, input)
-			&& !runData.digging_blocked
-			&& client->checkPrivilege("interact")) {
-		Interact::handleDigging(pointed, nodepos, selected_item, hand_item, dtime, client, nodedef_manager,
-		                        itemdef_manager, runData, crack_animation_length, soundmaker, m_repeat_dig_time,
-		                        camera);
-	}
-
-	// This should be done after digging handling
-	NodeMetadata *meta = map.getNodeMetadata(nodepos);
-
-	if (meta) {
-		m_game_ui->setInfoText(unescape_translate(utf8_to_wide(
-			meta->getString("infotext"))));
-	} else {
-		MapNode n = map.getNode(nodepos);
-
-		if (nodedef_manager->get(n).name == "unknown") {
-			m_game_ui->setInfoText(L"Unknown node");
-		}
-	}
-
-	if ((Interact::wasKeyPressed(KeyType::PLACE, input) ||
-			runData.repeat_place_timer >= m_repeat_place_time) &&
-			client->checkPrivilege("interact")) {
-		runData.repeat_place_timer = 0;
-		infostream << "Place button pressed while looking at ground" << std::endl;
-
-		// Placing animation (always shown for feedback)
-		camera->setDigging(1);
-
-		soundmaker->m_player_rightpunch_sound = SoundSpec();
-
-		// If the wielded item has node placement prediction,
-		// make that happen
-		// And also set the sound and send the interact
-		// But first check for meta formspec and rightclickable
-		auto &def = selected_item.getDefinition(itemdef_manager);
-		bool placed = Interact::nodePlacement(def, selected_item, nodepos, neighborpos, pointed, meta, client,
-		    soundmaker, input, nodedef_manager, &m_game_formspec);
-
-		if (placed && client->modsLoaded())
-			client->getScript()->on_placenode(pointed, def);
-	}
 }
 
 void Game::handlePointingAtObject(const PointedThing &pointed, const ItemStack &tool_item,

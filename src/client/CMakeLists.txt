@@ -60,6 +60,7 @@ set(client_SRCS
 	${CMAKE_CURRENT_SOURCE_DIR}/imagefilters.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/inputhandler.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/interact/dig.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/interact/handlePointingAtNode.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/interact/interact.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/interact/keypress.h
     ${CMAKE_CURRENT_SOURCE_DIR}/interact/nodeplacement.cpp
