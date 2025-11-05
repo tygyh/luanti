@@ -6,6 +6,7 @@
 
 #include "dig.h"
 #include "handlePointingAtNode.h"
+#include "handlePointingAtObject.h"
 #include "gui/touchcontrols.h"
 #include "keypress.h"
 #include "nodeplacement.h"
@@ -98,5 +99,14 @@ public:
 		                                           nodedef_manager, itemdef_manager, crack_animation_length, soundmaker,
 		                                           m_repeat_dig_time, camera, m_game_ui, m_repeat_place_time,
 		                                           m_game_formspec);
+	}
+
+	static void handlePointingAtObject(const PointedThing& pointed, const ItemStack& playeritem,
+	                                   const ItemStack& hand_item, const v3f& player_position, const bool show_debug,
+	                                   const GameRunData& runData, const std::unique_ptr<GameUI>& m_game_ui,
+	                                   InputHandler* input, const f32 m_repeat_dig_time, Client* client)
+	{
+		HandlePointingAtObject::handlePointingAtObject(pointed, playeritem, hand_item, player_position, show_debug,
+		                                               runData, m_game_ui, input, m_repeat_dig_time, client);
 	}
 };

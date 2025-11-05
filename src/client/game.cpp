@@ -2750,8 +2750,9 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 	} else if (pointed.type == POINTEDTHING_OBJECT) {
 		v3f player_position  = player->getPosition();
 		bool basic_debug_allowed = client->checkPrivilege("debug") || (player->hud_flags & HUD_FLAG_BASIC_DEBUG);
-		handlePointingAtObject(pointed, tool_item, hand_item, player_position,
-				m_game_ui->m_flags.show_basic_debug && basic_debug_allowed);
+		Interact::handlePointingAtObject(pointed, tool_item, hand_item, player_position,
+		                                 m_game_ui->m_flags.show_basic_debug && basic_debug_allowed, runData, m_game_ui,
+		                                 input, m_repeat_dig_time, client);
 	} else if (Interact::isKeyDown(KeyType::DIG, input)) {
 		// When button is held down in air, show continuous animation
 		runData.punching = true;
@@ -2779,59 +2780,6 @@ void Game::processPlayerInteraction(f32 dtime, bool show_hud)
 	input->joystick.clearWasKeyReleased(KeyType::DIG);
 	input->joystick.clearWasKeyReleased(KeyType::PLACE);
 }
-
-void Game::handlePointingAtObject(const PointedThing &pointed, const ItemStack &tool_item,
-		const ItemStack &hand_item, const v3f &player_position, bool show_debug)
-{
-	std::wstring infotext = unescape_translate(
-		utf8_to_wide(runData.selected_object->infoText()));
-
-	if (show_debug) {
-		if (!infotext.empty()) {
-			infotext += L"\n";
-		}
-		infotext += utf8_to_wide(runData.selected_object->debugInfoText());
-	}
-
-	m_game_ui->setInfoText(infotext);
-
-	if (Interact::isKeyDown(KeyType::DIG, input)) {
-		bool do_punch = false;
-		bool do_punch_damage = false;
-
-		if (runData.object_hit_delay_timer <= 0.0) {
-			do_punch = true;
-			do_punch_damage = true;
-			runData.object_hit_delay_timer = object_hit_delay;
-		}
-
-		if (Interact::wasKeyPressed(KeyType::DIG, input))
-			do_punch = true;
-
-		if (do_punch) {
-			infostream << "Punched object" << std::endl;
-			runData.punching = true;
-			runData.nodig_delay_timer = std::max(0.15f, m_repeat_dig_time);
-		}
-
-		if (do_punch_damage) {
-			// Report direct punch
-			v3f objpos = runData.selected_object->getPosition();
-			v3f dir = (objpos - player_position).normalize();
-
-			bool disable_send = runData.selected_object->directReportPunch(
-					dir, &tool_item, &hand_item, runData.time_from_last_punch);
-			runData.time_from_last_punch = 0;
-
-			if (!disable_send)
-				client->interact(INTERACT_START_DIGGING, pointed);
-		}
-	} else if (Interact::wasKeyDown(KeyType::PLACE, input)) {
-		infostream << "Pressed place button while pointing at object" << std::endl;
-		client->interact(INTERACT_PLACE, pointed);  // place
-	}
-}
-
 
 void Game::updateFrame(ProfilerGraph *graph, RunStats *stats, f32 dtime,
 		const CameraOrientation &cam)

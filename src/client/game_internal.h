@@ -36,8 +36,6 @@ class EventManager;
 class GUIChatConsole;
 class QuicktuneShortcutter;
 
-const static float object_hit_delay = 0.2;
-
 const static u16 bbox_debug_flag = scene::EDS_BBOX_ALL;
 
 /* The reason the following structs are not anonymous structs within the
@@ -147,8 +145,6 @@ protected:
 	void updateCamera(f32 dtime);
 	void updateSound(f32 dtime);
 	void processPlayerInteraction(f32 dtime, bool show_hud);
-	void handlePointingAtObject(const PointedThing &pointed, const ItemStack &playeritem,
-			const ItemStack &hand_item, const v3f &player_position, bool show_debug);
 	void updateFrame(ProfilerGraph *graph, RunStats *stats, f32 dtime,
 			const CameraOrientation &cam);
 	void updateClouds(float dtime);
