@@ -5,6 +5,7 @@
 #pragma once
 
 #include "dig.h"
+#include "handlePointingAtNothing.h"
 #include "handlePointingAtNode.h"
 #include "handlePointingAtObject.h"
 #include "gui/touchcontrols.h"
@@ -22,8 +23,6 @@
 class Interact
 {
 public:
-	static void handlePointingAtNothing(Client* client);
-
 	static bool isKeyDown(const GameKeyType k, InputHandler* input)
 	{
 		return keypress::isKeyDown(k, input);
@@ -108,5 +107,10 @@ public:
 	{
 		HandlePointingAtObject::handlePointingAtObject(pointed, playeritem, hand_item, player_position, show_debug,
 		                                               runData, m_game_ui, input, m_repeat_dig_time, client);
+	}
+
+	static void handlePointingAtNothing(Client* client)
+	{
+		HandlePointingAtNothing::handlePointingAtNothing(client);
 	}
 };
