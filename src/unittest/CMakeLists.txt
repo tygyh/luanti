@@ -49,6 +49,7 @@ set (UNITTEST_SRCS
 	${CMAKE_CURRENT_SOURCE_DIR}/test_threading.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/test_translations.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/test_utilities.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/test_view2d.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/test_voxelarea.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/test_voxelalgorithms.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/test_voxelmanipulator.cpp
