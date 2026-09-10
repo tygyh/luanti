@@ -14,7 +14,7 @@ Phase 1 creates the foundation for the entire refactoring. We'll implement:
 
 ## Step 1: Create View2d.h
 
-**Location**: `irr/include/View2d.h`
+**Location**: `src/client/View2d.h`
 
 ```cpp
 // Copyright (C) 2025 Luanti Contributors
@@ -155,7 +155,7 @@ public:
 
 ## Step 2: Create Array2d.h
 
-**Location**: `irr/include/Array2d.h`
+**Location**: `src/client/Array2d.h`
 
 ```cpp
 // Copyright (C) 2025 Luanti Contributors
@@ -234,7 +234,7 @@ public:
 
 ## Step 3: Create ColorFormats.h
 
-**Location**: `irr/include/ColorFormats.h`
+**Location**: `src/client/ColorFormats.h`
 
 ```cpp
 // Copyright (C) 2025 Luanti Contributors
@@ -449,18 +449,9 @@ void TestView2d::testArray2d()
 
 ## Step 5: Update Build System
 
-### For CMake (irr/CMakeLists.txt)
+### For CMake
 
-Add the new headers:
-
-```cmake
-set(IRRLICHT_HEADERS
-    # ... existing headers ...
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/View2d.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Array2d.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ColorFormats.h
-)
-```
+No Irrlicht CMake changes are needed. Keep these Phase 1 headers in Luanti-owned source (`src/client/`) so third-party Irrlicht remains untouched.
 
 ### For Unit Tests (src/unittest/CMakeLists.txt)
 

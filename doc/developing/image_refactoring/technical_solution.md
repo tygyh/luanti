@@ -290,9 +290,9 @@ Create the foundation:
 4. Add comprehensive unit tests
 
 **Deliverables:**
-- `irr/include/View2d.h`
-- `irr/include/Array2d.h`
-- `irr/include/ColorFormats.h`
+- `src/client/View2d.h`
+- `src/client/Array2d.h`
+- `src/client/ColorFormats.h`
 - `src/unittest/test_view2d.cpp`
 
 ### Phase 2: Image Class (1 week)

@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "unittest/test.h"
-#include "Array2d.h"
-#include "ColorFormats.h"
-#include "View2d.h"
+#include "client/Array2d.h"
+#include "client/ColorFormats.h"
+#include "client/View2d.h"
 
 class TestView2d : public TestBase
 {

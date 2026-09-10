@@ -43,9 +43,9 @@ Implement the foundation: View2d, Array2d, and color format types.
 
 ### Deliverables
 ```
-irr/include/View2d.h
-irr/include/Array2d.h
-irr/include/ColorFormats.h
+src/client/View2d.h
+src/client/Array2d.h
+src/client/ColorFormats.h
 src/unittest/test_view2d.cpp
 src/unittest/test_array2d.cpp
 src/unittest/test_colorformats.cpp
