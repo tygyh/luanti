@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Russian (Minetest)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-17 19:12+0200\n"
-"PO-Revision-Date: 2026-08-15 12:51+0000\n"
-"Last-Translator: BlackImpostor <SkyBuilderOFFICAL@yandex.ru>\n"
+"PO-Revision-Date: 2026-10-18 17:09+0000\n"
+"Last-Translator: Andrei Stepanov <adem@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
 "minetest/ru/>\n"
 "Language: ru\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: builtin/client/chatcommands.lua
 msgid "Clear the out chat queue"
@@ -353,6 +353,10 @@ msgid ""
 "data and programs on your device. This is not normally needed. Make sure you "
 "can trust the mod's code and its author beforehand!"
 msgstr ""
+"Любые моды, перечисленные в разделе «Доверенные моды», получат "
+"неограниченный доступ к пользовательским данным и программам на вашем "
+"устройстве. Обычно это не требуется. Заранее убедитесь, что вы можете "
+"доверять коду мода и его автору!"
 
 #. TRANSLATORS: Automatic
 #: builtin/common/settings/dlg_settings.lua
@@ -1390,27 +1394,26 @@ msgid "Disable Texture Pack"
 msgstr "Отключить набор текстур"
 
 #: builtin/mainmenu/tab_content.lua
-#, fuzzy
 msgid "Enable Texture Pack"
-msgstr "Отключить набор текстур"
+msgstr "Включить набор текстур"
 
 #: builtin/mainmenu/tab_content.lua
 msgid "Enabled texture packs are applied in priority order."
-msgstr ""
+msgstr "Включённые наборы текстур применяются в порядке приоритета."
 
 #: builtin/mainmenu/tab_content.lua
 msgid "If two packs provide the same texture, the one listed first wins."
 msgstr ""
+"Если два набора предоставляют одну и ту же текстуру, побеждает тот, что "
+"указан первым."
 
 #: builtin/mainmenu/tab_content.lua
-#, fuzzy
 msgid "Move Down"
-msgstr "Page Down"
+msgstr "Переместить вниз"
 
 #: builtin/mainmenu/tab_content.lua
-#, fuzzy
 msgid "Move Up"
-msgstr "Двигаться влево"
+msgstr "Переместить вверх"
 
 #: builtin/mainmenu/tab_content.lua
 msgid "No dependencies."
@@ -1425,9 +1428,8 @@ msgid "Rename"
 msgstr "Переименовать"
 
 #: builtin/mainmenu/tab_content.lua
-#, fuzzy
 msgid "Texture packs"
-msgstr "Наборы Текстур"
+msgstr "Наборы текстур"
 
 #: builtin/mainmenu/tab_content.lua
 msgid "Update available?"
@@ -1642,9 +1644,8 @@ msgid "No world selected and no address provided. Nothing to do."
 msgstr "Не выбран мир и не введён адрес. Нечего выполнять."
 
 #: src/client/clientlauncher.cpp
-#, fuzzy
 msgid "Player name is invalid."
-msgstr "Имена игроков: "
+msgstr "Имя игрока недопустимо."
 
 #: src/client/clientlauncher.cpp
 msgid "Please choose a name!"
@@ -2514,14 +2515,14 @@ msgid "Minimap hidden"
 msgstr "Миникарта скрыта"
 
 #: src/client/minimap.cpp
-#, fuzzy, c-format
+#, c-format
 msgid "Minimap in radar mode, Zoom x%.*f"
-msgstr "Миникарта в режиме радара, увеличение x%d"
+msgstr "Миникарта в режиме радара, увеличение x%.*f"
 
 #: src/client/minimap.cpp
-#, fuzzy, c-format
+#, c-format
 msgid "Minimap in surface mode, Zoom x%.*f"
-msgstr "Миникарта в ландшафтном режиме, увеличение x%d"
+msgstr "Миникарта в ландшафтном режиме, увеличение x%.*f"
 
 #: src/client/minimap.cpp
 msgid "Minimap in texture mode"
@@ -3577,24 +3578,21 @@ msgstr ""
 "content_flags/"
 
 #: src/settings_translation_file.cpp
-#, fuzzy
 msgid ""
 "Comma-separated list of mods that are allowed to use HTTP APIs, which\n"
 "allows them to connect to the Internet and devices on your network."
 msgstr ""
-"Список модов, разделённый запятыми, у которых есть доступ к HTTP API,\n"
-"что позволяет им загружать и отдавать данные через интернет."
+"Разделённый запятыми список модов, которым разрешено использовать HTTP API,\n"
+"что позволяет им подключаться к интернету и устройствам в вашей сети."
 
 #: src/settings_translation_file.cpp
-#, fuzzy
 msgid ""
 "Comma-separated list of trusted mods that are allowed to bypass the Lua\n"
 "sandbox. They will have full access to the host machine."
 msgstr ""
-"Список доверенных модов, разделённый запятыми, которым разрешён доступ к "
-"небезопасным\n"
-"функциям, даже когда включена безопасность модов (через "
-"request_insecure_environment())."
+"Разделённый запятыми список доверенных модов, которым разрешено обходить "
+"песочницу Lua.\n"
+"Они получат полный доступ к хост-машине."
 
 #: src/settings_translation_file.cpp
 msgid "Command"
@@ -3953,7 +3951,7 @@ msgstr "Для разработчиков"
 
 #: src/settings_translation_file.cpp
 msgid "Digging particles"
-msgstr ""
+msgstr "Частицы при копании"
 
 #: src/settings_translation_file.cpp
 msgid "Disable if you only want to instrument with Tracy."
@@ -5016,15 +5014,14 @@ msgstr ""
 "Клиент не будет получать большую часть невидимого."
 
 #: src/settings_translation_file.cpp
-#, fuzzy
 msgid ""
 "If enabled, you can place nodes that would be blocked by your collision "
 "box.\n"
 "This is helpful when working with nodeboxes in small areas."
 msgstr ""
-"Если включено, то вы можете размещать новые ноды на том месте, где вы "
-"стоите.\n"
-"Это может быть полезно при строительстве в узких местах."
+"Если включено, вы можете размещать узлы, которые блокировались бы вашей "
+"коробкой коллизий.\n"
+"Это полезно при работе с блоками узлов в небольших областях."
 
 #: src/settings_translation_file.cpp
 msgid ""
@@ -6209,7 +6206,6 @@ msgid "Occlusion Culling"
 msgstr "Окклюзивное отсечение"
 
 #: src/settings_translation_file.cpp
-#, fuzzy
 msgid ""
 "Occlusion culler to prefer\n"
 "\n"
@@ -6218,14 +6214,12 @@ msgid ""
 "\n"
 "This setting should only be changed if you have performance problems."
 msgstr ""
-"Методы окклюзивного отсечения\n"
+"Предпочитаемый метод окклюзивного отсечения\n"
 "\n"
-"«loops» - старый алгоритм со вложенными циклами и O(n³) сложностью\n"
-"«bfs» - новый алгоритм основанный на поиске в ширину и обрезании боковых "
-"граней\n"
+"«loops» — простой вложенный алгоритм сложностью O(n³)\n"
+"«bfs» — новый алгоритм на основе поиска в ширину и отсечения боковых граней\n"
 "\n"
-"Это значение должно изменяться только если у вас возникли проблемы с "
-"производительностью."
+"Это значение следует изменять только при проблемах с производительностью."
 
 #: src/settings_translation_file.cpp
 msgid "Opaqueness (alpha) of the shadow behind the font."
@@ -6986,7 +6980,7 @@ msgstr ""
 
 #: src/settings_translation_file.cpp
 msgid "Show local particles when digging nodes."
-msgstr ""
+msgstr "Показывать локальные частицы при копании узлов."
 
 #: src/settings_translation_file.cpp
 msgid "Show name tag backgrounds by default"
@@ -7773,6 +7767,9 @@ msgid ""
 "\n"
 "This setting should only be changed if you have performance problems."
 msgstr ""
+"Использовать трассируемое окклюзивное отсечение.\n"
+"\n"
+"Это значение следует изменять только при проблемах с производительностью."
 
 #: src/settings_translation_file.cpp
 msgid "Use smooth cloud shading."
@@ -7987,7 +7984,7 @@ msgstr "Цвет ссылки"
 
 #: src/settings_translation_file.cpp
 msgid "When enabled, liquid reflections are simulated."
-msgstr ""
+msgstr "Если включено, имитируются отражения жидкости."
 
 #: src/settings_translation_file.cpp
 msgid ""
