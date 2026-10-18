@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: minetest\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-17 19:12+0200\n"
-"PO-Revision-Date: 2026-09-21 03:51+0000\n"
+"PO-Revision-Date: 2026-10-18 17:09+0000\n"
 "Last-Translator: Jouni Järvinen <rautajunk@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/minetest/"
 "minetest/fi/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: builtin/client/chatcommands.lua
 msgid "Clear the out chat queue"
@@ -354,6 +354,10 @@ msgid ""
 "data and programs on your device. This is not normally needed. Make sure you "
 "can trust the mod's code and its author beforehand!"
 msgstr ""
+"Kaikilla \"Luotetut modit\"-luettelossa olevilla lisäosilla on rajoittamaton "
+"pääsy laitteellasi oleviin käyttäjätietoihin ja ohjelmiin. Tätä ei yleensä "
+"tarvita. Varmista siis etukäteen, että voit luottaa modin koodiin ja sen "
+"tekijään!"
 
 #. TRANSLATORS: Automatic
 #: builtin/common/settings/dlg_settings.lua
@@ -1394,27 +1398,27 @@ msgid "Disable Texture Pack"
 msgstr "Poista kuviointipaketti käytöstä"
 
 #: builtin/mainmenu/tab_content.lua
-#, fuzzy
 msgid "Enable Texture Pack"
-msgstr "Poista kuviointipaketti käytöstä"
+msgstr "Ota kuviointipaketti käyttöön"
 
 #: builtin/mainmenu/tab_content.lua
 msgid "Enabled texture packs are applied in priority order."
 msgstr ""
+"Käytössä olevat kuviointipaketit otetaan käyttöön tärkeysjärjestyksessä."
 
 #: builtin/mainmenu/tab_content.lua
 msgid "If two packs provide the same texture, the one listed first wins."
 msgstr ""
+"Jos kaksi pakettia tarjoaa saman kuvioinnin, ensimmäisenä luettelossa oleva "
+"on voimassa."
 
 #: builtin/mainmenu/tab_content.lua
-#, fuzzy
 msgid "Move Down"
-msgstr "Page down"
+msgstr "Siirrä alas"
 
 #: builtin/mainmenu/tab_content.lua
-#, fuzzy
 msgid "Move Up"
-msgstr "Liiku vasemmalle"
+msgstr "Siirrä ylös"
 
 #: builtin/mainmenu/tab_content.lua
 msgid "No dependencies."
@@ -1429,9 +1433,8 @@ msgid "Rename"
 msgstr "Nimeä uudelleen"
 
 #: builtin/mainmenu/tab_content.lua
-#, fuzzy
 msgid "Texture packs"
-msgstr "Muokatut kuvioinnit"
+msgstr "Kuviointipaketit"
 
 #: builtin/mainmenu/tab_content.lua
 msgid "Update available?"
@@ -1647,9 +1650,8 @@ msgstr ""
 "Ei ole valittu maailmaa eikä annettu osoitetta. Ei ole mitään tehtävää."
 
 #: src/client/clientlauncher.cpp
-#, fuzzy
 msgid "Player name is invalid."
-msgstr "Pelaajien nimet: "
+msgstr "Pelaajan nimi on virheellinen."
 
 #: src/client/clientlauncher.cpp
 msgid "Please choose a name!"
@@ -2521,14 +2523,14 @@ msgid "Minimap hidden"
 msgstr "Pienoiskartta piilotettu"
 
 #: src/client/minimap.cpp
-#, fuzzy, c-format
+#, c-format
 msgid "Minimap in radar mode, Zoom x%.*f"
-msgstr "Pienoiskartta tutkatilassa, %d-kertainen suurennus"
+msgstr "Pienoiskartta tutkatilassa, %.*f-kertainen suurennus"
 
 #: src/client/minimap.cpp
-#, fuzzy, c-format
+#, c-format
 msgid "Minimap in surface mode, Zoom x%.*f"
-msgstr "Pienoiskartta pintatilassa, %d-kertainen suurennus"
+msgstr "Pienoiskartta pintatilassa, %.*f-kertainen suurennus"
 
 #: src/client/minimap.cpp
 msgid "Minimap in texture mode"
@@ -3249,7 +3251,6 @@ msgstr ""
 "Ilmoitetaan maailmakuutioina (16 kuutiota)."
 
 #: src/settings_translation_file.cpp
-#, fuzzy
 msgid ""
 "At this distance the server will consider blocks as \"far away\".\n"
 "It will perform simpler and cheaper occlusion checks, update\n"
@@ -3258,12 +3259,13 @@ msgid ""
 "This is especially useful for very large viewing range (upwards of 500).\n"
 "Stated in MapBlocks (16 nodes)."
 msgstr ""
-"Tällä etäisyydellä palvelin käyttää yksinkertaisempaa ja halvempaa "
-"peittävyystarkastusta.\n"
-"Pienet arvot mahdollisesti parantavat suorituskykyä, mutta silloin voi "
-"ilmetä\n"
-"tilapäisesti näkyviä piirtovirheitä (puuttuvia kuutioita).\n"
-"Tämä on erityisen hyödyllinen, kun näköetäisyys on todella suuri (yli 500).\n"
+"Tällä etäisyydellä palvelin luokittelee lohkot ”kaukaisiksi”.\n"
+"Se suorittaa yksinkertaisempia ja vähemmän resursseja vaativia\n"
+"peittävyystarkistuksia, päivittää alhaisen prioriteetin lohkopäivitykset\n"
+"viiveellä (ns. laiska päivitys) ja rajoittaa yhdellä edestakaisella\n"
+"viestinvaihdolla asiakkaalle lähetettävien lohkojen määrää.\n"
+"Tämä on erityisen hyödyllistä, kun näkymäetäisyys on hyvin suuri\n"
+"(jopa yli 500).\n"
 "Ilmoitetaan maailmakuutioina (16 kuutiota)."
 
 #: src/settings_translation_file.cpp
@@ -3597,7 +3599,6 @@ msgstr ""
 "täyden luettelon osoitteessa https://content.luanti.org/help/content_flags/"
 
 #: src/settings_translation_file.cpp
-#, fuzzy
 msgid ""
 "Comma-separated list of mods that are allowed to use HTTP APIs, which\n"
 "allows them to connect to the Internet and devices on your network."
@@ -3612,10 +3613,10 @@ msgid ""
 "Comma-separated list of trusted mods that are allowed to bypass the Lua\n"
 "sandbox. They will have full access to the host machine."
 msgstr ""
-"Pilkuin erotettu luettelo luotetuista lisäosista, joilla on lupa käyttää "
-"turvattomia\n"
-"funktioita myös silloin, kun lisäosien turvallisuus on päällä (toiminnon "
-"request_insecure_environment() kautta)."
+"Pilkuin erotettu luettelo luotetuista lisäosista, joilla on lupa ohittaa "
+"Luan hiekkalaatikko käyttää turvattomia\n"
+"funktioita myös silloin, kun lisäosien turvallisuus on päällä (funktion "
+"\"request_insecure_environment()\" kautta)."
 
 #: src/settings_translation_file.cpp
 msgid "Command"
@@ -3804,7 +3805,7 @@ msgid ""
 "Set this to -1 to disable the limit."
 msgstr ""
 "Oletusarvoinen väkisin ladattujen maailmakuutioiden suurin määrä.\n"
-"Aseta tämä arvoon -1 poistaaksesi rajoituksen."
+"Aseta tämä arvoon -1 kytkeäksesi rajoituksen pois päältä."
 
 #: src/settings_translation_file.cpp
 msgid "Default password"
@@ -3975,7 +3976,7 @@ msgstr "Kehittäjäasetukset"
 
 #: src/settings_translation_file.cpp
 msgid "Digging particles"
-msgstr ""
+msgstr "Kaivaushiukkaset"
 
 #: src/settings_translation_file.cpp
 msgid "Disable if you only want to instrument with Tracy."
@@ -5072,15 +5073,14 @@ msgstr ""
 "näkymättömiä kuutioita, joten koskemattomuustila on vähemmän hyödyllinen."
 
 #: src/settings_translation_file.cpp
-#, fuzzy
 msgid ""
 "If enabled, you can place nodes that would be blocked by your collision "
 "box.\n"
 "This is helpful when working with nodeboxes in small areas."
 msgstr ""
-"Jos asetus on päällä, kuutioita voi sijoittaa paikkaan, jossa seisoo (jalat "
-"+ silmien taso).\n"
-"Tämä on hyödyllistä, kun työskentelee kuutioiden parissa pienessä tilassa."
+"Jos se on mahdollista, voit asettaa kuutioita, jotka törmäyslaatikkosi "
+"estää.\n"
+"Tämä on hyödyllistä, kun työskentelet pienillä alueilla."
 
 #: src/settings_translation_file.cpp
 msgid ""
@@ -6299,7 +6299,6 @@ msgid "Occlusion Culling"
 msgstr "Peittyvien asioiden karsiminen"
 
 #: src/settings_translation_file.cpp
-#, fuzzy
 msgid ""
 "Occlusion culler to prefer\n"
 "\n"
@@ -7081,7 +7080,7 @@ msgstr ""
 
 #: src/settings_translation_file.cpp
 msgid "Show local particles when digging nodes."
-msgstr ""
+msgstr "Näytä paikallisia hiukkasia kuutioita kaivettaessa."
 
 #: src/settings_translation_file.cpp
 msgid "Show name tag backgrounds by default"
@@ -7868,6 +7867,10 @@ msgid ""
 "\n"
 "This setting should only be changed if you have performance problems."
 msgstr ""
+"Käytä säteenseurantaan perustuvaa peittymiskarsintaa (raytraced occlusion "
+"culling).\n"
+"\n"
+"Tätä asetusta tulee muuttaa vain, jos on suorituskykyongelmia."
 
 #: src/settings_translation_file.cpp
 msgid "Use smooth cloud shading."
@@ -8081,7 +8084,7 @@ msgstr "Verkkolinkin väri"
 
 #: src/settings_translation_file.cpp
 msgid "When enabled, liquid reflections are simulated."
-msgstr ""
+msgstr "Kun asetus on käytössä, nesteiden heijastukset simuloidaan."
 
 #: src/settings_translation_file.cpp
 msgid ""
