@@ -3,8 +3,9 @@ msgstr ""
 "Project-Id-Version: Polish (Minetest)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-17 19:12+0200\n"
-"PO-Revision-Date: 2026-10-14 03:53+0000\n"
-"Last-Translator: SaltyJoe <saltyjoe@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2026-10-19 19:51+0000\n"
+"Last-Translator: Leszek Cimała <ernierasta@users.noreply.hosted.weblate.org>"
+"\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/minetest/minetest/"
 "pl/>\n"
 "Language: pl\n"
@@ -8135,7 +8136,7 @@ msgstr "Kolor zaznaczenia linku"
 
 #: src/settings_translation_file.cpp
 msgid "When enabled, liquid reflections are simulated."
-msgstr ""
+msgstr "Kiedy włączono, odbicia w cieczach są symulowane."
 
 #: src/settings_translation_file.cpp
 msgid ""
@@ -8143,7 +8144,7 @@ msgid ""
 "Whether this is enabled by default depends on your hardware form-factor."
 msgstr ""
 "Gdy włączone, to interfejs gry jest optymalizowany dla ekranów dotykowych.\n"
-"Domyślnie ustawienie zależy od urządzenia."
+"Domyślnie ustawienie tej opcji zależy od typu urządzenia."
 
 #: src/settings_translation_file.cpp
 msgid ""
