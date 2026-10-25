@@ -8,14 +8,16 @@ msgstr ""
 "Project-Id-Version: luanti\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-17 19:12+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-10-26 14:51+0000\n"
+"Last-Translator: VoxB4 <voxb4@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Uzbek <https://hosted.weblate.org/projects/minetest/minetest/"
+"uz/>\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: builtin/client/chatcommands.lua
 msgid "Issued command: "
@@ -23,86 +25,88 @@ msgstr ""
 
 #: builtin/client/chatcommands.lua
 msgid "Empty command."
-msgstr ""
+msgstr "Bo'sh buyruq."
 
 #: builtin/client/chatcommands.lua
 msgid "Invalid command: "
-msgstr ""
+msgstr "Noto'g'ri buyruq: "
 
 #: builtin/client/chatcommands.lua
 msgid "List online players"
-msgstr ""
+msgstr "Onlayn o'yinchilarni ko'rish"
 
 #: builtin/client/chatcommands.lua
 msgid "This command is disabled by server."
-msgstr ""
+msgstr "Buyruq ushub serverda mavjud emas yoki o'chirilgan."
 
 #: builtin/client/chatcommands.lua
 msgid "Online players: "
-msgstr ""
+msgstr "Onlay o'yinchilar: "
 
 #: builtin/client/chatcommands.lua
 msgid "Exit to main menu"
-msgstr ""
+msgstr "Asosiy menyuga qaytish"
 
 #: builtin/client/chatcommands.lua
 msgid "Clear the out chat queue"
-msgstr ""
+msgstr "Tashqi chat navbatini tozalash"
 
 #: builtin/client/chatcommands.lua
 msgid "The out chat queue is now empty."
-msgstr ""
+msgstr "Tashqi chat navbati bo'sh hozir."
 
 #: builtin/common/chatcommands.lua
 msgid "Available commands: "
-msgstr ""
+msgstr "Mavjud buyruqlar: "
 
 #. TRANSLATORS: 'help' and 'all' mustn't be translated. cmd = command
 #: builtin/common/chatcommands.lua
 msgid ""
 "Use '.help <cmd>' to get more information, or '.help all' to list everything."
 msgstr ""
+"Biror buyruq haqida ko'proq ma'lumot olish uchun '.help <buyruq>' yoki "
+"barcha buyruqlar ro'yhati uchun '.help all' dan foydalaning."
 
 #: builtin/common/chatcommands.lua
 msgid "Available commands:"
-msgstr ""
+msgstr "Mavjud buyruqlar:"
 
 #: builtin/common/chatcommands.lua
 msgid "Command not available: "
-msgstr ""
+msgstr "Bu buyruq mavjud emas: "
 
 #. TRANSLATORS: Syntax of 'help' command. Don't translate anything except 'cmd' (=command)
 #: builtin/common/chatcommands.lua
 msgid "[all | <cmd>] [-t]"
-msgstr ""
+msgstr "[all|<buyruq>] [-t]"
 
 #: builtin/common/chatcommands.lua
 msgid "Get help for commands (-t: output in chat)"
-msgstr ""
+msgstr "Buyruqlar uchun yordam oling (-t: chatda ko'rsatish)"
 
 #: builtin/common/settings/components.lua
 msgid "Set"
-msgstr ""
+msgstr "Tayinlash"
 
 #: builtin/common/settings/components.lua
 msgid "Browse"
-msgstr ""
+msgstr "Ko'zdan kechirish"
 
 #: builtin/common/settings/components.lua
 msgid "Select directory"
-msgstr ""
+msgstr "Bo'limni tanlash"
 
 #: builtin/common/settings/components.lua
 msgid "Select file"
-msgstr ""
+msgstr "Faylni tanlash"
 
 #: builtin/common/settings/components.lua
 msgid "Edit"
-msgstr ""
+msgstr "Tahrirlash"
 
 #: builtin/common/settings/components.lua
 msgid "Conflicts with \"$1\""
-msgstr ""
+msgstr "\"$1\" Bilan mos kelmaslik"
 
 #: builtin/common/settings/components.lua
 msgid "Remove keybinding"
