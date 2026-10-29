@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: luanti\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-17 19:12+0200\n"
-"PO-Revision-Date: 2025-10-24 07:54+0000\n"
-"Last-Translator: Artur Ajvazjan <arturaiwasan@gmail.com>\n"
+"PO-Revision-Date: 2026-10-29 19:08+0000\n"
+"Last-Translator: Krock <krock@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Interslavic <https://hosted.weblate.org/projects/minetest/"
 "minetest/isv/>\n"
 "Language: isv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14.1-dev\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: builtin/client/chatcommands.lua
 msgid "Clear the out chat queue"
@@ -2687,7 +2687,7 @@ msgstr ""
 #: src/network/clientpackethandler.cpp src/script/lua_api/l_client.cpp
 #: src/script/lua_api/l_mainmenu.cpp
 msgid "LANG_CODE"
-msgstr ""
+msgstr "isv"
 
 #: src/network/clientpackethandler.cpp
 msgid ""
