@@ -176,8 +176,8 @@ void VoxelManipulator::addArea(const VoxelArea &area)
 	delete[] old_flags;
 }
 
-void VoxelManipulator::copyFrom(MapNode *src, bool is_mono_block, const VoxelArea& src_area,
-		v3s16 from_pos, v3s16 to_pos, const v3s16 &size)
+void VoxelManipulator::copyFrom(MapNode *src, bool is_mono_block, const VoxelArea &src_area,
+		const VoxelArea &dst_area)
 {
 	/* The reason for this optimised code is that we're a member function
 	 * and the data type/layout of m_data is know to us: it's stored as
@@ -204,23 +204,23 @@ void VoxelManipulator::copyFrom(MapNode *src, bool is_mono_block, const VoxelAre
 	 * index".
 	 */
 
-	s32 src_step = src_area.getExtent().X;
+	auto size = src_area.getExtent();
+	s32 src_step = size.X;
 	s32 dest_step = m_area.getExtent().X;
-	s32 dest_mod = m_area.index(to_pos.X, to_pos.Y, to_pos.Z + 1)
-			- m_area.index(to_pos.X, to_pos.Y, to_pos.Z)
-			- dest_step * size.Y;
+	s32 dest_mod = m_area.index(dst_area.MinEdge + v3s16(0, 0, 1))
+			- m_area.index(dst_area.MinEdge) - dest_step * size.Y;
 
-	s32 i_src = src_area.index(from_pos.X, from_pos.Y, from_pos.Z);
-	s32 i_local = m_area.index(to_pos.X, to_pos.Y, to_pos.Z);
+	s32 i_src = src_area.index(src_area.MinEdge);
+	s32 i_local = m_area.index(dst_area.MinEdge);
 
 	for (s16 z = 0; z < size.Z; z++) {
 		for (s16 y = 0; y < size.Y; y++) {
 			if (is_mono_block) {
-				std::fill_n(m_data + i_local, size.X, src[0]);
+				std::fill_n(m_data + i_local, src_step, src[0]);
 			} else {
-				std::copy_n(src + i_src, size.X, m_data + i_local);
+				std::copy_n(src + i_src, src_step, m_data + i_local);
 			}
-			std::fill_n(m_flags + i_local, size.X, 0);
+			std::fill_n(m_flags + i_local, src_step, 0);
 			i_src += src_step;
 			i_local += dest_step;
 		}
@@ -228,14 +228,15 @@ void VoxelManipulator::copyFrom(MapNode *src, bool is_mono_block, const VoxelAre
 	}
 }
 
-void VoxelManipulator::copyTo(MapNode *dst, const VoxelArea& dst_area,
-		v3s16 dst_pos, v3s16 from_pos, const v3s16 &size) const
+void VoxelManipulator::copyTo(MapNode *dst, const VoxelArea &src_area,
+		const VoxelArea &dst_area) const
 {
-	for(s16 z=0; z<size.Z; z++)
-	for(s16 y=0; y<size.Y; y++)
+	auto size = src_area.getExtent();
+	for (s16 z = 0; z < size.Z; z++)
+	for (s16 y = 0; y < size.Y; y++)
 	{
-		s32 i_dst = dst_area.index(dst_pos.X, dst_pos.Y+y, dst_pos.Z+z);
-		s32 i_local = m_area.index(from_pos.X, from_pos.Y+y, from_pos.Z+z);
+		s32 i_dst = dst_area.index(dst_area.MinEdge + v3s16(0, y, z));
+		s32 i_local = m_area.index(src_area.MinEdge + v3s16(0, y, z));
 		for (s16 x = 0; x < size.X; x++) {
 			if (m_data[i_local].getContent() != CONTENT_IGNORE)
 				dst[i_dst] = m_data[i_local];
